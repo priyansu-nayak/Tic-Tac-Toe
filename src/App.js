@@ -33,11 +33,8 @@ function calculateWinner(squares) {
 }
 
 
-function Board() {
+function Board({xIsNext,squares,onPlay}) {
 
-
-  const [xIsNext, setXIsNext] = useState(true);
-  const [squares, setSquares] = useState(Array(9).fill(null));
   /*
   Array(9) means creates array of size 9
   fill(null) puts null at 9 nines
@@ -103,7 +100,7 @@ export default function Game() {
   const currentSquares = history[history.length -1];
 
   function handlePlay (nextSquares){
-    
+
   }
 
 
