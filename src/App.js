@@ -1,4 +1,9 @@
-import React from 'react'
+import React from 'react';
 export default function Square() {
-  return <button className="square">X</button>;
+  return (
+    <React.Fragment>
+      <button className="square">X</button>
+      <button className="square">X</button>
+    </React.Fragment>
+  );
 }
