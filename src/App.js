@@ -8,7 +8,8 @@ function Square({value,onSquareClick}) {
 
 
 export default function Board() {
-  const [squares, setSquares] = useState(Array(9).fill(null));
+  const [xIsNext, setXIsNext] = useState(true);
+  const [squares, setSquares] = useState(Array(9).fill("*"));
   /*
   Array(9) means creates array of size 9
   fill(null) puts null at 9 nines
@@ -19,8 +20,14 @@ export default function Board() {
      a new array that is a shallow copy of a portion of the 
      original array. When you call squares.slice(), it will 
      create a copy of the entire squares array. */
-    nextSquares[i]="X";
+    if(xIsNext){
+      nextSquares[i]="X";
+    }
+    else{
+      nextSquares[i]="O";
+    }
     setSquares(nextSquares);
+    setXIsNext(!xIsNext);
   }
   
   return (
