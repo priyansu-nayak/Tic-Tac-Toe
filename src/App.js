@@ -9,15 +9,20 @@ function Square({value,onSquareClick}) {
 
 export default function Board() {
   const [squares, setSquares] = useState(Array(9).fill(null));
-  function handleClick(){
+  /*
+  Array(9) means creates array of size 9
+  fill(null) puts null at 9 nines
+  */
+  function handleClick(i){
     const nextSquares = squares.slice();
     /* the slice() method can be used with an array to create
      a new array that is a shallow copy of a portion of the 
      original array. When you call squares.slice(), it will 
      create a copy of the entire squares array. */
-    nextSquares[0]="X";
+    nextSquares[i]="X";
     setSquares(nextSquares);
   }
+  
   return (
     <React.Fragment>
       <div className="board-row">
