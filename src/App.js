@@ -33,7 +33,7 @@ function calculateWinner(squares) {
 }
 
 
-export default function Board() {
+function Board() {
 
 
   const [xIsNext, setXIsNext] = useState(true);
@@ -95,4 +95,19 @@ export default function Board() {
   );
 }
 
+
+export default function Game() {
+  
+  
+  return (
+    <div className="game">
+      <div className="game-board">
+        <Board/>
+      </div>
+      <div className="game-info">
+        <ol></ol>
+      </div>
+    </div>
+  );
+}
 
