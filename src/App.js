@@ -11,6 +11,10 @@ export default function Board() {
   const [squares, setSquares] = useState(Array(9).fill(null));
   function handleClick(){
     const nextSquares = squares.slice();
+    /* the slice() method can be used with an array to create
+     a new array that is a shallow copy of a portion of the 
+     original array. When you call squares.slice(), it will 
+     create a copy of the entire squares array. */
     nextSquares[0]="X";
     setSquares(nextSquares);
   }
