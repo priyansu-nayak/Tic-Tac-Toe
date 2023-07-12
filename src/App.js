@@ -2,35 +2,19 @@ import React from 'react';
 import { useState } from 'react';
 
 function Square({ value, onSquareClick }) {
+  return <button className='square'
+    onClick={onSquareClick}>{value}</button>
+  /*
 
-  return <button className='square' onClick={onSquareClick}>{value}</button>
+  onSquareClick is an parameter 
+  value is an parameter
+  onClick here is an built-in attribute in html button element
+  onClick's work = whenever there's a click on the button it invokes the 
+  function mentioned
+   
+   */
 }
 
-function calculateWinner(squares) {
-  const lines = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-
-    [0, 4, 8],
-    [2, 4, 6]
-  ];
-
-  for (let i = 0; i < lines.length; i++) {
-    const [a, b, c] = lines[i];
-    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-
-      return squares[a];
-
-    }
-  }
-
-  return null;
-}
 
 
 function Board({ xIsNext, squares, onPlay }) {
@@ -40,7 +24,7 @@ function Board({ xIsNext, squares, onPlay }) {
   fill(null) puts null at 9 nines
   */
   function handleClick(i) {
-    if (squares[i] || calculateWinner(squares)) {
+    if (calculateWinner(squares) || squares[i]) {
       return;
     }
     const nextSquares = squares.slice();
@@ -98,11 +82,35 @@ export default function Game() {
 
   const [xIsNext, setXIsNext] = useState(true);
   const [history, setHistory] = useState([Array(9).fill(null)]);
-  const currentSquares = history[history.length - 1];
+  /*
+  console.log(history)
+  Output:  
+  [[null, null, null, null, null, null, null, null, null]]
 
+  Note that the outer square brackets represent the 
+  history array, and the inner square brackets represent 
+  the array contained within history itself.
+  */
+  const currentSquares = history[history.length - 1];
+  /*
+  history.length = 9 
+  and index of history array starts from 0 and ends at 8
+  so , currentSquares is storing the value of last element 
+  of history array which is "null" at this line
+
+  */
   function handlePlay(nextSquares) {
     setHistory([...history, nextSquares]);
+    /*
+      ...history means elements of the history array 
+      nextSquares is an array 
+      nextSquares is appended to the history array
+
+    */
     setXIsNext(!xIsNext);
+    /*
+     toggles xIsNext between true or false
+    */
   }
 
   function jumpTo(nextMove) {
@@ -119,7 +127,7 @@ export default function Game() {
     }
     return (
       <li>
-        <button onClick={()=>jumpTo(move)}>{description}</button> 
+        <button onClick={() => jumpTo(move)}>{description}</button>
       </li>
     )
   });
@@ -136,3 +144,28 @@ export default function Game() {
   );
 }
 
+function calculateWinner(squares) {
+  const lines = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+
+    [0, 4, 8],
+    [2, 4, 6]
+  ];
+
+  for (let i = 0; i < lines.length; i++) {
+    const [a, b, c] = lines[i];
+    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+
+      return squares[a];
+
+    }
+  }
+
+  return null;
+}
