@@ -24,6 +24,7 @@ function Board({ xIsNext, squares, onPlay }) {
   fill(null) puts null at 9 nines
   */
   function handleClick(i) {
+    
     if (calculateWinner(squares) || squares[i]) {
       return;
     }
@@ -32,6 +33,7 @@ function Board({ xIsNext, squares, onPlay }) {
      a new array that is a shallow copy of a portion of the 
      original array. When you call squares.slice(), it will 
      create a copy of the entire squares array. */
+    
     if (xIsNext) {
       nextSquares[i] = "X";
     }
@@ -81,17 +83,22 @@ function Board({ xIsNext, squares, onPlay }) {
 export default function Game() {
 
   const [xIsNext, setXIsNext] = useState(true);
+  
   const [history, setHistory] = useState([Array(9).fill(null)]);
+  
   /*
   console.log(history)
   Output:  
   [[null, null, null, null, null, null, null, null, null]]
+  now look carefully, "Array(9).fill(null)" is wrapped inside [] 
+  which means that the array is itself a single element in history
 
   Note that the outer square brackets represent the 
   history array, and the inner square brackets represent 
   the array contained within history itself.
   */
   const currentSquares = history[history.length - 1];
+  
   /*
   history.length = 9 
   and index of history array starts from 0 and ends at 8
@@ -118,6 +125,7 @@ export default function Game() {
   }
 
   const moves = history.map((squares, move) => {
+    console.log("move: ",move);
     let description;
     if (move > 0) {
       description = 'Go to move #' + move;
@@ -126,7 +134,7 @@ export default function Game() {
       description = 'Go to game start';
     }
     return (
-      <li>
+      <li key={move}>
         <button onClick={() => jumpTo(move)}>{description}</button>
       </li>
     )
@@ -145,6 +153,7 @@ export default function Game() {
 }
 
 function calculateWinner(squares) {
+  
   const lines = [
     [0, 1, 2],
     [3, 4, 5],
@@ -161,7 +170,7 @@ function calculateWinner(squares) {
   for (let i = 0; i < lines.length; i++) {
     const [a, b, c] = lines[i];
     if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-
+      
       return squares[a];
 
     }
