@@ -122,7 +122,9 @@ export default function Game() {
     */
     const nextHistory = [...history.slice(0, currentMove + 1), nextSquares]
     setHistory(nextHistory);
-    console.log("nextHistory: ", nextHistory);
+    console.log("...",...history.slice(0, currentMove + 1))
+    console.log("no...",history.slice(0, currentMove + 1))
+    console.log("nextHistory: ",nextHistory)
     setCurrentMove(nextHistory.length - 1);
     setXIsNext(!xIsNext);
     /*
