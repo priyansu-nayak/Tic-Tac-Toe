@@ -84,7 +84,7 @@ function Board({ xIsNext, squares, onPlay }) {
 
 export default function Game() {
 
-  const [xIsNext, setXIsNext] = useState(true);
+
 
   const [history, setHistory] = useState([Array(9).fill(null)]);
 
@@ -109,7 +109,8 @@ export default function Game() {
   of history array which is "null" at this line
 
   */
- const currentSquares = history[currentMove];
+  const [xIsNext, setXIsNext] = useState(true);
+  const currentSquares = history[currentMove];
 
   function handlePlay(nextSquares) {
     // setHistory([...history, nextSquares]);
